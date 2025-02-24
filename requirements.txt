@@ -2,3 +2,4 @@ Django>=3.2,<5.0
 djangorestframework
 pillow  # For handling images
 db-sqlite3  # If using SQLite
+gunicorn
