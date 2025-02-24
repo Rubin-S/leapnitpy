@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--uwo$rjlx^sf3dip)7*j^qg4q1u*kbk2j*+l@@8u8rt&lk^*=s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['leapnitpy.us.to', 'localhost', '152.67.3.126', "127.0.0.1"]
+ALLOWED_HOSTS = ['leapnitpy.us.to', 'localhost', '152.67.3.126', "127.0.0.1","leapnitpy.onrender.com"]
 CSRF_TRUSTED_ORIGINS = [
     'https://leapnitpy.us.to',
     'http://leapnitpy.us.to',  # If using HTTP as well
