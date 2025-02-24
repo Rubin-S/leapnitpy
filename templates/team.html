@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="py-5 mt-5">
+        <!-- Start: Testimonials -->
+        <div class="container py-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold">Our<br><span class="underline pb-2">Team</span></h2>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 d-sm-flex justify-content-sm-center">
+                <div class="col mb-4"><img class="rounded img-fluid" alt="A man standing in front of a window" width="100%" height="auto" src="{% static 'img/austin.png' %}">
+                    <div class="d-flex align-items-center align-items-sm-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-quote fs-1 text-warning flex-shrink-0">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"></path>
+                        </svg>
+                        <div>
+                            <p class="fs-6 mb-3 ms-2">I feel proud in mentoring students</p>
+                            <div class="d-flex ms-2">
+                                <div class="d-flex">
+                                    <p class="fw-bold me-2">Austin Allan</p>
+                                    <p class="text-muted mb-0">Coordinating Head</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4"><img class="rounded img-fluid" alt="A man standing in front of a window" width="100%" height="auto" src="{% static 'img/kaushik.png' %}">
+                    <div class="d-flex align-items-center align-items-sm-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-quote fs-1 text-warning flex-shrink-0">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"></path>
+                        </svg>
+                        <div>
+                            <p class="fs-6 mb-3 ms-2">I feel proud in mentoring students</p>
+                            <div class="d-flex ms-2">
+                                <div class="d-flex">
+                                    <p class="fw-bold me-2">Kaushik</p>
+                                    <p class="text-muted mb-0">Biology Head</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4"><img class="rounded img-fluid" alt="A man standing in front of a window" width="auto" height="100%" src="{% static 'img/naufil.png' %}">
+                    <div class="d-flex align-items-center align-items-sm-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-quote fs-1 text-warning flex-shrink-0">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"></path>
+                        </svg>
+                        <div>
+                            <p class="fs-6 mb-3 ms-2">I feel proud in mentoring students</p>
+                            <div class="d-flex ms-2">
+                                <div class="d-flex">
+                                    <p class="fw-bold me-2">Naufil Ahemad</p>
+                                    <p class="text-muted mb-0">Chemistry Head</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 d-sm-flex justify-content-sm-center">
+                <div class="col mb-4"><img class="rounded img-fluid" alt="A man standing in front of a window" width="100%" height="auto" src="{% static 'img/snehan.png' %}">
+                    <div class="d-flex align-items-center align-items-sm-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-quote fs-1 text-warning flex-shrink-0">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"></path>
+                        </svg>
+                        <div>
+                            <p class="fs-6 mb-3 ms-2">I feel proud in mentoring students</p>
+                            <div class="d-flex ms-2">
+                                <div class="d-flex">
+                                    <p class="fw-bold me-2">Snehan</p>
+                                    <p class="text-muted mb-0">Physics Head</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4"><img class="rounded img-fluid" width="100%" height="auto" src="{% static 'img/ojas.png' %}">
+                    <div class="d-flex align-items-center align-items-sm-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-quote fs-1 text-warning flex-shrink-0">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"></path>
+                        </svg>
+                        <div>
+                            <p class="fs-6 mb-3 ms-2">I'm the Web Dev Head....<br>I believe a website for such an innovative program would help students all around the country to have the quality of education.</p>
+                            <div class="d-flex ms-2">
+                                <div class="d-flex">
+                                    <p class="fw-bold me-2">Ojas&nbsp;</p>
+                                    <p class="text-muted mb-0">Web Development Head</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End: Testimonials -->
+    </section><!-- Start: Footer Multi Column -->
+{% endblock %}

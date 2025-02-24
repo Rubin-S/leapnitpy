@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Study Portal - LEAP</title>
+    <meta name="description" content="All the PDFs, notes and PYQs available here. LEAP NITPY has been proven the best non profit organisation for the benefit of unprivileged students in providing notes. ">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+</head>
+
+<body>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Instructions</h1>
+      </div>
+      <div class="modal-body">
+          <ul>
+              <li>Do NOT exit the fullscreen mode, otherwise the test will be submitted</li>
+              <li>Do NOT switch the windows, otherwise the test will be submitted</li>
+          </ul>
+        <button class="btn btn-outline-success w-100" id="fullscreenbtn">Click Here to start the test</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <section class="py-5 mt-5 container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-6">
+                <div class="row">
+                    <div class="col">
+<div class="d-flex mt-4">
+  <p>Timer:</p>
+  <p id="timer" class="ml-2">00:00:00</p>
+</div>
+
+
+                        <p class="mt-4" id="question-text">Question Text</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"><img style="width: 100%;height: auto;" src="" id="question-file"></div>
+                </div>
+                <p hidden="hidden" id="current-question"></p>
+                <div class="row">
+                    <div class="col">
+                        <div class="row" id="answerOption">
+<div class="col">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="formCheck-1" name="options" value="A">
+        <label class="form-check-label" for="formCheck-1">Option A</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="formCheck-2" name="options" value="B">
+        <label class="form-check-label" for="formCheck-2">Option B</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="formCheck-3" name="options" value="C">
+        <label class="form-check-label" for="formCheck-3">Option C</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="formCheck-4" name="options" value="D">
+        <label class="form-check-label" for="formCheck-4">Option D</label>
+    </div>
+</div>
+
+                        </div>
+                        <div class="row" id="answerNumerical">
+                            <div class="col text-center m-3"><input type="text" placeholder="Enter the answer here" id="numans"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-between"><button class="btn btn-primary" type="button" id="save" onclick="save()">Save</button><button class="btn btn-danger" type="button" id="clear">Clear</button><button class="btn btn-info" type="button" id="submit" onclick="submit()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6" style="overflow-y:scroll; max-height: 60vh" id="question-pane">
+                <hr>
+                <h3>Question Pane</h3>
+
+            </div>
+        </div>
+    </section><!-- Start: Footer Multi Column -->
+       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.min.js' %}"></script>
+{{ test|json_script:"test-data" }}
+<script>
+
+    var answers = {};
+var scriptElement = document.getElementById('test-data');
+
+// Parse the JSON content of the script tag
+var testData = JSON.parse(scriptElement.textContent || scriptElement.innerText);
+
+// Now you can use testData as a JavaScript object
+console.log(testData);  // Will log the object with "questions" and "time"
+let questionPane = document.getElementById('question-pane');
+
+var q = 1;
+for (let key in testData.questions) {
+  if (testData.questions.hasOwnProperty(key)) {
+    let button = document.createElement('button');
+    button.classList.add('btn', 'btn-primary', 'w-100', 'mt-2');
+      button.textContent = `Question ${q}`;
+      button.id = `question-btn-${q}`;
+    button.onclick = function() {
+        displayQuestion(key);
+    };
+    questionPane.appendChild(button);
+    q = q+1;
+  }
+}
+
+function displayQuestion(question_id) {
+    // Assuming testData is an object with a 'questions' property that is an object
+    const question = testData.questions[question_id];
+
+    var question_text = document.getElementById('question-text');
+    var image = document.getElementById('question-file');
+    var answerOption = document.getElementById('answerOption');
+    var answerNumerical = document.getElementById('answerNumerical');
+    var currentQuestion = document.getElementById('current-question')
+
+    if (question) {
+       question_text.innerText = question.question;
+       if (question.question_file){
+       image.src = question.question_file;}
+       else{
+           image.src = "";
+       }
+       currentQuestion.innerText = question_id;
+       if (question.type === "option"){
+        answerOption.setAttribute("style", "visibility: visible;");
+        answerNumerical.setAttribute("style", "visibility: hidden;");
+        if (answers[question_id]){
+            v = answers[question_id];
+            document.querySelector(`input[name="options"][value="${v}"]`).checked = true;
+        }
+        else{
+                        let radios = document.querySelectorAll('input[name="options"]');
+            radios.forEach(radio => {
+              radio.checked = false;
+            });
+
+        }
+       }
+       else{
+                   answerOption.setAttribute("style", "visibility: hidden;");
+        answerNumerical.setAttribute("style", "visibility: visible;");
+                if (answers[question_id]){
+            v = answers[question_id];
+            document.getElementById('numans').value = v;
+        }
+                else{
+                    document.getElementById('numans').value = "";
+                }
+       }
+    } else {
+        console.log("Question not found"); // Handle the case when the question_id is invalid
+    }
+}
+
+window.onload = function() {
+        var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        myModal.show();
+    };
+    // Function to enter fullscreen mode
+    function enterFullscreen() {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+    }
+
+    // Wait until the page has fully loaded
+    // Event listener for the button click
+document.getElementById('fullscreenbtn').addEventListener('click', function() {
+    window.onbeforeunload = function(event) {
+    const message = "Are you sure you want to leave? Changes you made may not be saved.";
+    event.returnValue = message;
+    return message;
+};
+
+window.onunload = function() {
+    submit()
+        };
+    var modalElement = document.getElementById('staticBackdrop');
+    var myModal = bootstrap.Modal.getInstance(modalElement);
+    if (myModal) {
+        myModal.hide(); // Close the modal
+    }
+    let button = document.getElementById("question-btn-1");
+    if (button) {
+  button.click();
+}
+    enterFullscreen(); // Enter fullscreen mode
+    startTimer();
+    // Add event listener to detect fullscreen changes
+        document.addEventListener('fullscreenchange', onFullscreenChange); // Standard
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari/Chrome
+        document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
+        document.addEventListener('MSFullscreenChange', onFullscreenChange); // IE/Edge
+document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            submit();
+            console.log('User switched to another tab or minimized the browser.');
+        } else {
+            console.log('User is back to the page.');
+        }
+    });
+});
+
+    function onFullscreenChange() {
+            if (!document.fullscreenElement) {
+                console.log('Fullscreen mode exited');
+                submit();
+            }
+        }
+
+        
+function save(){
+    const selectedOption = document.querySelector('input[name="options"]:checked');
+    var question_id = document.getElementById('current-question').textContent;
+    var answerNumerical = document.getElementById('numans').value;
+    if ((testData['questions'][question_id]['type']) === "numerical"){
+        answers[question_id] = answerNumerical;
+    }
+    else{
+        if (selectedOption) {
+            console.log('Selected Option:', selectedOption.value);
+            answers[question_id] = selectedOption.value;
+        } else {
+            console.log('No option selected');
+        }
+    }
+}
+
+ function startTimer() {
+            let seconds = {{ test.time }};
+            function formatTime(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const remainingSeconds = seconds % 60;
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+            const timerInterval = setInterval(() => {
+                document.getElementById('timer').innerText = formatTime(seconds);
+                seconds--;
+                if (seconds<=0){
+                    submit();
+                }
+            }, 1000);
+        }
+
+function submit() {
+  // Define the endpoint URL
+  const url = '/submit_test/{{ test.test_id }}/';
+
+  // Use fetch to make the POST request
+  fetch(url, {
+    method: 'POST',               // HTTP method
+    headers: {
+      'Content-Type': 'application/json'  // Indicate that the body is JSON
+    },
+    body: JSON.stringify(answers)  // Convert the answers object to a JSON string
+  })
+  .then(response => {
+    if (!response.ok) {
+      // If the response status is not OK (not in the range 200-299)
+      throw new Error(`Error: ${response.statusText}`);
+    }
+    return response.json();  // Parse the JSON response if the request was successful
+  })
+  .then(data => {
+    console.log('Test submitted successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error submitting test:', error);
+  });
+  window.onbeforeunload = null;
+window.onunload = null;
+  window.location.href = '/';
+}
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="py-5 mt-5">
+    <h1 class="d-flex justify-content-center mt-3 mb-3">Test Analysis</h1>
+    <h3 class="d-flex justify-content-center mt-3 mb-3">Total Score is {{ total }}</h3>
+    <div class="container my-4">
+        {% for item in qna %}
+            <hr>
+            <div class="col-md-12 col-lg-6">
+                <div class="row">
+                    <div class="col">
+                        <p class="mt-4"><strong>Question:</strong> {{ item.question }}</p>
+                                        <div class="row">
+                                            {% if item.question_file %}
+
+                    <div class="col">
+                        <img style="width: 100%; height: auto;" src="{{ item.question_file }}">
+                    </div>
+                                            {% endif %}
+                </div>
+                        <p><strong>Status:</strong> {{ item.status }}</p>
+                        <p><strong>Marks:</strong> {{ item.marks }}</p>
+                        <p><strong>Your Answer:</strong> {{ item.your_answer }}</p>
+                        <p><strong>Correct Answer:</strong> {{ item.correct_ans }}</p>
+                    </div>
+                </div>
+                {% if item.explanation_file %}
+                <div class="row">
+                    <div class="col">
+                        <img style="width: 100%; height: auto;" src="{{ item.explanation_file }}" alt="Explanation Image">
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col">
+                        <p>{{ item.explanation_text }}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

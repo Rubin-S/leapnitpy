@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="py-5 mt-5">
+    <h1 class="d-flex justify-content-center mt-3 mb-3">Study Material</h1>
+    <div class="container">
+        <div class="row row-cols-1 d-flex justify-content-center align-items-center">
+            <div class="col">
+                <div>
+                    <!-- Nav Tabs for Subjects -->
+                    <ul class="nav nav-tabs d-sm-flex justify-content-around" role="tablist">
+                        {% for course_name, course_content in entire_dict.items %}
+                            {% for subject_name, subject_content in course_content.items %}
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link {% if forloop.first %}active{% endif %}" role="tab" data-bs-toggle="tab" href="#tab-{{ forloop.counter }}">
+                                    {{ subject_name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+    {% for course_name, course_content in entire_dict.items %}
+        {% for subject_name, subject_content in course_content.items %}
+        <div class="tab-pane {% if forloop.first %}active{% endif %}" role="tabpanel" id="tab-{{ forloop.counter }}">
+            <!-- Accordion for Chapters -->
+            <div class="accordion" id="accordion-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
+                {% for chapter_name, chapter_data in subject_content.items %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
+                            {{ chapter_name }}
+                        </button>
+                    </h2>
+                    <div id="collapse-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" data-bs-parent="#accordion-{{ forloop.parentloop.counter }}">
+                        <div class="accordion-body">
+
+                        <a href="/create_test/{{ chapter_data.key }}" class="btn btn-outline-success">Create Test</a>
+                            {% if chapter_data.chapter_dict %}
+                                {% for material in chapter_data.chapter_dict %}
+                                    <hr>
+                                    <div class="mb-3">
+                                        <p>{{ material.desc }}</p>
+                                        <a class="btn btn-primary" href="{{ material.url }}" download>Download</a>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <hr>
+                                <p>No study materials available.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
