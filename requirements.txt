@@ -1,0 +1,4 @@
+Django>=3.2,<5.0
+djangorestframework
+pillow  # For handling images
+sqlite3  # If using SQLite
